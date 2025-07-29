@@ -5,15 +5,15 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="datatidy",
-    version="1.0.0",
+    version="1.0.1",
     author="DataTidy Development Team",
     author_email="maintainer@example.com",
     description="A powerful, configuration-driven data processing and cleaning package",
-    url="https://github.com/example/datatidy",
+    url="https://github.com/wwd1015/datatidy",
     project_urls={
-        "Bug Reports": "https://github.com/example/datatidy/issues",
-        "Source": "https://github.com/example/datatidy",
-        "Documentation": "https://github.com/example/datatidy#readme",
+        "Bug Reports": "https://github.com/wwd1015/datatidy/issues",
+        "Source": "https://github.com/wwd1015/datatidy",
+        "Documentation": "https://github.com/wwd1015/datatidy#readme",
     },
     long_description=long_description,
     long_description_content_type="text/markdown",

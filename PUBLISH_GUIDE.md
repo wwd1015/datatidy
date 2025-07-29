@@ -55,9 +55,8 @@ dist/
 
 2. **Add repository URL to package metadata**:
    ```bash
-   # Update these URLs in setup.py and pyproject.toml
-   # Replace "your-username" with your actual GitHub username
-   url="https://github.com/your-username/datatidy"
+   # URLs already updated in setup.py and pyproject.toml
+   url="https://github.com/wwd1015/datatidy"
    ```
 
 ### Step 2: Initial Commit and Push
@@ -89,7 +88,7 @@ Features:
 Co-Authored-By: Claude <noreply@anthropic.com>"
 
 # Add your GitHub repository as remote
-git remote add origin https://github.com/your-username/datatidy.git
+git remote add origin https://github.com/wwd1015/datatidy.git
 
 # Push to GitHub
 git branch -M main

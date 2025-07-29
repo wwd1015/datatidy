@@ -10,5 +10,5 @@ from .core import DataTidy
 from .config.parser import ConfigParser
 from .input.readers import DataReader
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __all__ = ["DataTidy", "ConfigParser", "DataReader"]

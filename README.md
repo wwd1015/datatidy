@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/datatidy-logo-small.png" alt="DataTidy Logo" width="400">
+  <img src="assets/datatidy-logo-pypi.png" alt="DataTidy Logo" width="300">
   
   <h3>Configuration-Driven Data Processing Made Simple</h3>
   

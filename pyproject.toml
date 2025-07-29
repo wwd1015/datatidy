@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "datatidy"
-version = "1.0.0"
+version = "1.0.1"
 description = "A powerful, configuration-driven data processing and cleaning package"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -56,11 +56,11 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/datatidy"
-Documentation = "https://github.com/example/datatidy#readme"
-Repository = "https://github.com/example/datatidy"
-"Bug Reports" = "https://github.com/example/datatidy/issues"
-Changelog = "https://github.com/example/datatidy/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/wwd1015/datatidy"
+Documentation = "https://github.com/wwd1015/datatidy#readme"
+Repository = "https://github.com/wwd1015/datatidy"
+"Bug Reports" = "https://github.com/wwd1015/datatidy/issues"
+Changelog = "https://github.com/wwd1015/datatidy/blob/main/CHANGELOG.md"
 
 [project.scripts]
 datatidy = "datatidy.cli:main"
