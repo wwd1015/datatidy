@@ -6,7 +6,20 @@ INPUT_SOURCE_SCHEMA = {
     "properties": {
         "type": {
             "type": "string",
-            "enum": ["csv", "excel", "xlsx", "xls", "database", "db", "sql", "snowflake", "postgres", "mysql", "parquet", "pickle"]
+            "enum": [
+                "csv",
+                "excel",
+                "xlsx",
+                "xls",
+                "database",
+                "db",
+                "sql",
+                "snowflake",
+                "postgres",
+                "mysql",
+                "parquet",
+                "pickle",
+            ],
         },
         "source": {
             "oneOf": [
@@ -17,15 +30,17 @@ INPUT_SOURCE_SCHEMA = {
                         "path": {"type": "string"},
                         "query": {"type": "string"},
                         "connection_string": {"type": "string"},
-                        "sheet_name": {"oneOf": [{"type": "string"}, {"type": "integer"}]},
-                        "options": {"type": "object"}
-                    }
-                }
+                        "sheet_name": {
+                            "oneOf": [{"type": "string"}, {"type": "integer"}]
+                        },
+                        "options": {"type": "object"},
+                    },
+                },
             ]
         },
         "connection_string": {"type": "string"},
-        "options": {"type": "object"}
-    }
+        "options": {"type": "object"},
+    },
 }
 
 JOIN_SCHEMA = {
@@ -41,31 +56,41 @@ JOIN_SCHEMA = {
                 {
                     "type": "object",
                     "properties": {
-                        "left": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]},
-                        "right": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]}
+                        "left": {
+                            "oneOf": [
+                                {"type": "string"},
+                                {"type": "array", "items": {"type": "string"}},
+                            ]
+                        },
+                        "right": {
+                            "oneOf": [
+                                {"type": "string"},
+                                {"type": "array", "items": {"type": "string"}},
+                            ]
+                        },
                     },
-                    "required": ["left", "right"]
+                    "required": ["left", "right"],
                 },
                 {
                     "type": "object",
                     "patternProperties": {
                         "^[a-zA-Z_][a-zA-Z0-9_]*$": {"type": "string"}
-                    }
-                }
+                    },
+                },
             ]
         },
         "how": {
             "type": "string",
             "enum": ["inner", "left", "right", "outer", "cross"],
-            "default": "inner"
+            "default": "inner",
         },
         "suffix": {
             "type": "array",
             "items": {"type": "string"},
             "minItems": 2,
-            "maxItems": 2
-        }
-    }
+            "maxItems": 2,
+        },
+    },
 }
 
 CONFIG_SCHEMA = {
@@ -73,12 +98,7 @@ CONFIG_SCHEMA = {
     "title": "DataTidy Configuration Schema",
     "type": "object",
     "oneOf": [
-        {
-            "required": ["input", "output"],
-            "properties": {
-                "input": INPUT_SOURCE_SCHEMA
-            }
-        },
+        {"required": ["input", "output"], "properties": {"input": INPUT_SOURCE_SCHEMA}},
         {
             "required": ["inputs", "output"],
             "properties": {
@@ -87,28 +107,20 @@ CONFIG_SCHEMA = {
                     "patternProperties": {
                         "^[a-zA-Z_][a-zA-Z0-9_]*$": INPUT_SOURCE_SCHEMA
                     },
-                    "minProperties": 1
+                    "minProperties": 1,
                 },
-                "joins": {
-                    "type": "array",
-                    "items": JOIN_SCHEMA
-                }
-            }
-        }
+                "joins": {"type": "array", "items": JOIN_SCHEMA},
+            },
+        },
     ],
     "properties": {
         "input": INPUT_SOURCE_SCHEMA,
         "inputs": {
             "type": "object",
-            "patternProperties": {
-                "^[a-zA-Z_][a-zA-Z0-9_]*$": INPUT_SOURCE_SCHEMA
-            },
-            "minProperties": 1
+            "patternProperties": {"^[a-zA-Z_][a-zA-Z0-9_]*$": INPUT_SOURCE_SCHEMA},
+            "minProperties": 1,
         },
-        "joins": {
-            "type": "array",
-            "items": JOIN_SCHEMA
-        },
+        "joins": {"type": "array", "items": JOIN_SCHEMA},
         "output": {
             "type": "object",
             "required": ["columns"],
@@ -121,7 +133,16 @@ CONFIG_SCHEMA = {
                             "type": "object",
                             "properties": {
                                 "source": {"type": "string"},
-                                "type": {"type": "string", "enum": ["string", "int", "float", "bool", "datetime"]},
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "string",
+                                        "int",
+                                        "float",
+                                        "bool",
+                                        "datetime",
+                                    ],
+                                },
                                 "format": {"type": "string"},
                                 "transformation": {"type": "string"},
                                 "interim": {"type": "boolean", "default": False},
@@ -130,16 +151,25 @@ CONFIG_SCHEMA = {
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "type": {"type": "string", "enum": ["map", "filter", "reduce", "group", "window"]},
+                                            "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "map",
+                                                    "filter",
+                                                    "reduce",
+                                                    "group",
+                                                    "window",
+                                                ],
+                                            },
                                             "function": {"type": "string"},
                                             "condition": {"type": "string"},
                                             "fill_value": {},
                                             "initial_value": {},
                                             "group_by": {"type": "string"},
-                                            "window_size": {"type": "integer"}
+                                            "window_size": {"type": "integer"},
                                         },
-                                        "required": ["type"]
-                                    }
+                                        "required": ["type"],
+                                    },
                                 },
                                 "validation": {
                                     "type": "object",
@@ -151,13 +181,13 @@ CONFIG_SCHEMA = {
                                         "min_length": {"type": "integer"},
                                         "max_length": {"type": "integer"},
                                         "pattern": {"type": "string"},
-                                        "allowed_values": {"type": "array"}
-                                    }
+                                        "allowed_values": {"type": "array"},
+                                    },
                                 },
-                                "default": {}
-                            }
+                                "default": {},
+                            },
                         }
-                    }
+                    },
                 },
                 "filters": {
                     "type": "array",
@@ -166,9 +196,13 @@ CONFIG_SCHEMA = {
                         "required": ["condition"],
                         "properties": {
                             "condition": {"type": "string"},
-                            "action": {"type": "string", "enum": ["keep", "remove"], "default": "keep"}
-                        }
-                    }
+                            "action": {
+                                "type": "string",
+                                "enum": ["keep", "remove"],
+                                "default": "keep",
+                            },
+                        },
+                    },
                 },
                 "sort": {
                     "type": "array",
@@ -177,11 +211,11 @@ CONFIG_SCHEMA = {
                         "required": ["column"],
                         "properties": {
                             "column": {"type": "string"},
-                            "ascending": {"type": "boolean", "default": True}
-                        }
-                    }
-                }
-            }
+                            "ascending": {"type": "boolean", "default": True},
+                        },
+                    },
+                },
+            },
         },
         "global_settings": {
             "type": "object",
@@ -190,16 +224,16 @@ CONFIG_SCHEMA = {
                 "max_errors": {"type": "integer", "default": 100},
                 "encoding": {"type": "string", "default": "utf-8"},
                 "show_execution_plan": {"type": "boolean", "default": False},
-                "verbose": {"type": "boolean", "default": False}
-            }
-        }
-    }
+                "verbose": {"type": "boolean", "default": False},
+            },
+        },
+    },
 }
 
 
 class ConfigSchema:
     """Configuration schema validator."""
-    
+
     @staticmethod
     def get_schema() -> dict:
         """Get the configuration schema."""
