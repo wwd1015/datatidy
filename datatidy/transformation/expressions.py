@@ -305,6 +305,17 @@ class SafeExpressionParser:
             elif isinstance(node.op, ast.Or):
                 return any(self._eval_node(value, context) for value in node.values)
 
+        elif isinstance(node, ast.Index):
+            # Handle ast.Index nodes (used in older Python versions for subscript operations)
+            return self._eval_node(node.value, context)
+
+        elif isinstance(node, ast.Slice):
+            # Handle slice operations
+            lower = self._eval_node(node.lower, context) if node.lower else None
+            upper = self._eval_node(node.upper, context) if node.upper else None
+            step = self._eval_node(node.step, context) if node.step else None
+            return slice(lower, upper, step)
+
         else:
             raise ValueError(f"Unsupported node type: {type(node).__name__}")
 
