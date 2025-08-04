@@ -1,7 +1,7 @@
 """Data readers for various input sources."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union, Type
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -163,9 +163,9 @@ class DataReaderFactory:
             connection_string = kwargs.get("connection_string")
             return reader_class(connection_string=connection_string)
 
-        return reader_class()
+        return reader_class()  # type: ignore
 
     @classmethod
-    def register_reader(cls, source_type: str, reader_class: type) -> None:
+    def register_reader(cls, source_type: str, reader_class: Type[DataReader]) -> None:
         """Register a new reader type."""
         cls._readers[source_type.lower()] = reader_class

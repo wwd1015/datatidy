@@ -71,7 +71,7 @@ class EnhancedLogger:
         self.logger.info(f"🔄 Starting DataTidy processing in {mode.value} mode")
         self.logger.info(f"📊 Processing {total_columns} columns")
 
-    def log_column_success(self, column_name: str, processing_time: float = None):
+    def log_column_success(self, column_name: str, processing_time: Optional[float] = None):
         """Log successful column processing."""
         self.processing_metrics["successful_columns"] += 1
 
@@ -202,7 +202,7 @@ class EnhancedLogger:
         if not self.error_log:
             return {"total_errors": 0}
 
-        summary = {
+        summary: Dict[str, Any] = {
             "total_errors": len(self.error_log),
             "by_category": {},
             "by_column": {},
@@ -216,19 +216,22 @@ class EnhancedLogger:
             error_type = error["error_type"]
 
             # By category
-            if category not in summary["by_category"]:
-                summary["by_category"][category] = 0
-            summary["by_category"][category] += 1
+            by_category = summary["by_category"]
+            if category not in by_category:
+                by_category[category] = 0
+            by_category[category] += 1
 
             # By column
-            if column not in summary["by_column"]:
-                summary["by_column"][column] = 0
-            summary["by_column"][column] += 1
+            by_column = summary["by_column"]
+            if column not in by_column:
+                by_column[column] = 0
+            by_column[column] += 1
 
             # By error type
-            if error_type not in summary["most_common_errors"]:
-                summary["most_common_errors"][error_type] = 0
-            summary["most_common_errors"][error_type] += 1
+            most_common = summary["most_common_errors"]
+            if error_type not in most_common:
+                most_common[error_type] = 0
+            most_common[error_type] += 1
 
         return summary
 

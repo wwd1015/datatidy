@@ -1,6 +1,6 @@
 """Data quality metrics for comparing DataTidy vs fallback results."""
 
-from typing import Dict, List
+from typing import Dict, List, Any
 import pandas as pd
 import numpy as np
 from dataclasses import dataclass
@@ -95,7 +95,7 @@ class DataQualityMetrics:
             datatidy_only_columns=datatidy_only,
             fallback_only_columns=fallback_only,
             column_metrics=column_metrics,
-            overall_quality_score=overall_score,
+            overall_quality_score=float(overall_score),
             processing_time_comparison={
                 "datatidy": datatidy_time,
                 "fallback": fallback_time,
@@ -290,7 +290,7 @@ class DataQualityMetrics:
         comparison: DataQualityComparison, file_path: str, include_details: bool = True
     ):
         """Export detailed comparison report to file."""
-        report = {
+        report: Dict[str, Any] = {
             "comparison_timestamp": datetime.now().isoformat(),
             "summary": {
                 "datatidy_rows": comparison.datatidy_rows,

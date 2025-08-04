@@ -85,6 +85,9 @@ class JoinEngine:
     ) -> pd.DataFrame:
         """Perform a single join operation."""
         # Handle different join key formats
+        left_on: Union[str, List[str]]
+        right_on: Union[str, List[str]]
+        
         if isinstance(config.on, str):
             # Simple case: same column name in both datasets
             left_on = right_on = config.on

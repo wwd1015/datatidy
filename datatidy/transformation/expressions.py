@@ -192,13 +192,13 @@ class SafeExpressionParser:
         elif isinstance(node, ast.BinOp):
             left = self._eval_node(node.left, context)
             right = self._eval_node(node.right, context)
-            op = self.SAFE_OPERATORS[type(node.op)]
-            return op(left, right)
+            op_func = self.SAFE_OPERATORS[type(node.op)]
+            return op_func(left, right)  # type: ignore
 
         elif isinstance(node, ast.UnaryOp):
             operand = self._eval_node(node.operand, context)
-            op = self.SAFE_OPERATORS[type(node.op)]
-            return op(operand)
+            op_func = self.SAFE_OPERATORS[type(node.op)]
+            return op_func(operand)  # type: ignore
 
         elif isinstance(node, ast.Compare):
             left = self._eval_node(node.left, context)
@@ -206,7 +206,7 @@ class SafeExpressionParser:
             for op, comparator in zip(node.ops, node.comparators):
                 right = self._eval_node(comparator, context)
                 op_func = self.SAFE_OPERATORS[type(op)]
-                result = result and op_func(left, right)
+                result = result and op_func(left, right)  # type: ignore
                 left = right
             return result
 
@@ -288,7 +288,7 @@ class SafeExpressionParser:
             return tuple(self._eval_node(elt, context) for elt in node.elts)
 
         elif isinstance(node, ast.Dict):
-            keys = [self._eval_node(k, context) for k in node.keys]
+            keys = [self._eval_node(k, context) if k is not None else None for k in node.keys]
             values = [self._eval_node(v, context) for v in node.values]
             return dict(zip(keys, values))
 
@@ -307,7 +307,7 @@ class SafeExpressionParser:
 
         elif isinstance(node, ast.Index):
             # Handle ast.Index nodes (used in older Python versions for subscript operations)
-            return self._eval_node(node.value, context)
+            return self._eval_node(node.value, context)  # type: ignore
 
         elif isinstance(node, ast.Slice):
             # Handle slice operations

@@ -93,9 +93,12 @@ class TransformationEngine:
 
         # Remove duplicates while preserving order
         seen = set()
-        columns_to_keep = [
-            col for col in columns_to_keep if not (col in seen or seen.add(col))
-        ]
+        unique_columns = []
+        for col in columns_to_keep:
+            if col not in seen:
+                seen.add(col)
+                unique_columns.append(col)
+        columns_to_keep = unique_columns
 
         # If user specified to only keep output columns, filter input columns too
         if self.config["output"].get("only_output_columns", False):

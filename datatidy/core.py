@@ -124,7 +124,7 @@ class DataTidy:
             "success": result.success,
             "processing_mode": result.processing_mode.value,
             "processing_time": result.processing_time,
-            "total_columns": len(self.config["output"]["columns"]),
+            "total_columns": len(self.config["output"]["columns"]) if self.config else 0,
             "successful_columns": len(result.successful_columns),
             "failed_columns": len(result.failed_columns),
             "skipped_columns": len(result.skipped_columns),
@@ -218,10 +218,12 @@ class DataTidy:
     def _load_input_data(self) -> pd.DataFrame:
         """Load input data based on configuration."""
         # Check if using new multi-input format
-        if "inputs" in self.config:
+        if self.config and "inputs" in self.config:
             return self._load_multi_input_data()
 
         # Single input (backward compatibility)
+        if not self.config:
+            raise ValueError("No configuration loaded")
         input_config = self.config["input"]
         source_type = input_config["type"]
         source = input_config["source"]
@@ -240,6 +242,8 @@ class DataTidy:
 
     def _load_multi_input_data(self) -> pd.DataFrame:
         """Load and join multiple input sources."""
+        if not self.config:
+            raise ValueError("No configuration loaded")
         inputs_config = self.config["inputs"]
         joins_config = self.config.get("joins", [])
 
