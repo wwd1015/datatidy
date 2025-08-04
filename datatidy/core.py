@@ -124,7 +124,9 @@ class DataTidy:
             "success": result.success,
             "processing_mode": result.processing_mode.value,
             "processing_time": result.processing_time,
-            "total_columns": len(self.config["output"]["columns"]) if self.config else 0,
+            "total_columns": (
+                len(self.config["output"]["columns"]) if self.config else 0
+            ),
             "successful_columns": len(result.successful_columns),
             "failed_columns": len(result.failed_columns),
             "skipped_columns": len(result.skipped_columns),

@@ -288,7 +288,10 @@ class SafeExpressionParser:
             return tuple(self._eval_node(elt, context) for elt in node.elts)
 
         elif isinstance(node, ast.Dict):
-            keys = [self._eval_node(k, context) if k is not None else None for k in node.keys]
+            keys = [
+                self._eval_node(k, context) if k is not None else None
+                for k in node.keys
+            ]
             values = [self._eval_node(v, context) for v in node.values]
             return dict(zip(keys, values))
 

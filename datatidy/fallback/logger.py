@@ -71,7 +71,9 @@ class EnhancedLogger:
         self.logger.info(f"🔄 Starting DataTidy processing in {mode.value} mode")
         self.logger.info(f"📊 Processing {total_columns} columns")
 
-    def log_column_success(self, column_name: str, processing_time: Optional[float] = None):
+    def log_column_success(
+        self, column_name: str, processing_time: Optional[float] = None
+    ):
         """Log successful column processing."""
         self.processing_metrics["successful_columns"] += 1
 
