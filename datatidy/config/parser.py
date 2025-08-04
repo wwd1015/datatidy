@@ -122,7 +122,9 @@ class ConfigParser:
                         "type": "string",
                         "validation": {
                             "required": True,
-                            "pattern": r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                            "pattern": (
+                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            ),
                         },
                     },
                     "age_group": {

@@ -2,7 +2,7 @@
 
 import ast
 import re
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Set
 from collections import defaultdict, deque
 
 
@@ -237,7 +237,8 @@ class DependencyResolver:
                 for dep in deps:
                     if dep not in all_columns:
                         errors.append(
-                            f"Column '{column_name}': transformation references unknown column '{dep}'"
+                            f"Column '{column_name}': transformation references "
+                            f"unknown column '{dep}'"
                         )
 
             # Check operations dependencies

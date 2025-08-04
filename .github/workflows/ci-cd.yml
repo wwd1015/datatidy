@@ -35,7 +35,7 @@ jobs:
 
     - name: Run linting
       run: |
-        uv run flake8 datatidy/
+        uv run flake8 --max-line-length=100 datatidy/
         uv run black --check datatidy/
 
     - name: Run type checking

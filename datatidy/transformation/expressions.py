@@ -2,8 +2,7 @@
 
 import ast
 import operator
-import re
-from typing import Any, Callable, Dict, List, Union
+from typing import Any, Dict
 import pandas as pd
 import numpy as np
 
@@ -161,6 +160,8 @@ class SafeExpressionParser:
                     ast.Load,
                     ast.Store,
                     ast.Del,
+                    ast.And,
+                    ast.Or,
                 ),
             ):  # Add context types
                 continue
@@ -239,6 +240,37 @@ class SafeExpressionParser:
                 }
                 if attr_name in allowed_pandas_methods:
                     return getattr(value, attr_name)
+            # Allow numpy array methods
+            elif isinstance(value, np.ndarray):
+                allowed_numpy_methods = {
+                    "round",
+                    "sum",
+                    "mean",
+                    "std",
+                    "var",
+                    "min",
+                    "max",
+                    "argmin",
+                    "argmax",
+                    "sort",
+                    "argsort",
+                    "flatten",
+                    "reshape",
+                    "astype",
+                }
+                if attr_name in allowed_numpy_methods:
+                    return getattr(value, attr_name)
+            # Allow numpy-like methods on Series values
+            elif hasattr(value, attr_name) and attr_name in {
+                "round",
+                "sum",
+                "mean",
+                "std",
+                "var",
+                "min",
+                "max",
+            }:
+                return getattr(value, attr_name)
 
             raise AttributeError(f"Access to attribute '{attr_name}' is not allowed")
 
@@ -354,7 +386,8 @@ class ExpressionParser:
                 available_cols = list(df.columns)
                 raise ValueError(
                     f"Column reference '{expression}' not found. "
-                    f"Available columns: {available_cols[:10]}{'...' if len(available_cols) > 10 else ''}"
+                    f"Available columns: {available_cols[:10]}"
+                    f"{'...' if len(available_cols) > 10 else ''}"
                 )
             # Fall back to row-by-row evaluation
             return df.apply(lambda row: self.evaluate(expression, row), axis=1)

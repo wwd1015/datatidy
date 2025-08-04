@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "datatidy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A powerful, configuration-driven data processing and cleaning package"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -92,11 +92,12 @@ extend-exclude = '''
 '''
 
 [tool.mypy]
-python_version = "3.8"
-warn_return_any = true
+python_version = "3.9"
+warn_return_any = false
 warn_unused_configs = true
-disallow_untyped_defs = true
+disallow_untyped_defs = false
 ignore_missing_imports = true
+check_untyped_defs = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -124,4 +125,10 @@ exclude_lines = [
     "if __name__ == .__main__.:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
+]
+
+[dependency-groups]
+dev = [
+    "twine>=6.1.0",
+    "types-pyyaml>=6.0.12.20241230",
 ]

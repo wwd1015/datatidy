@@ -119,7 +119,8 @@ def process_command(args: argparse.Namespace) -> None:
             print(f"   Success: {'✅' if summary['success'] else '❌'}")
             print(f"   Processing time: {summary['processing_time']:.2f}s")
             print(
-                f"   Successful columns: {summary['successful_columns']}/{summary['total_columns']}"
+                f"   Successful columns: "
+                f"{summary['successful_columns']}/{summary['total_columns']}"
             )
 
             if summary["failed_columns"] > 0:
@@ -151,7 +152,8 @@ def process_command(args: argparse.Namespace) -> None:
                 print(f"   - {error['column']}: {error['error_message']}")
             if len(result.error_log) > 5:
                 print(
-                    f"   ... and {len(result.error_log) - 5} more (see --error-log for details)"
+                    f"   ... and {len(result.error_log) - 5} more "
+                    f"(see --error-log for details)"
                 )
 
         if result.success:

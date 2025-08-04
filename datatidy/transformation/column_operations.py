@@ -1,6 +1,6 @@
 """Advanced column operations for sophisticated data transformations."""
 
-from typing import Any, Callable, Dict, List, Union, Optional
+from typing import Any, Callable, Dict, List
 import pandas as pd
 import numpy as np
 from functools import reduce

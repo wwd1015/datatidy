@@ -5,30 +5,31 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+
+sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'DataTidy'
-copyright = '2024, DataTidy Development Team'
-author = 'Wendi Wang'
-release = '0.1.0'
-version = '0.1.0'
+project = "DataTidy"
+copyright = "2024, DataTidy Development Team"
+author = "Wendi Wang"
+release = "0.1.0"
+version = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.githubpages',
-    'myst_parser',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.githubpages",
+    "myst_parser",
 ]
 
 # Napoleon settings
@@ -50,64 +51,64 @@ napoleon_attr_annotations = True
 # MyST settings
 myst_enable_extensions = [
     "deflist",
-    "tasklist", 
+    "tasklist",
     "colon_fence",
 ]
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+templates_path = ["_templates"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_theme = "sphinx_rtd_theme"
+html_static_path = ["_static"]
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # Custom CSS
 html_css_files = [
-    'custom.css',
+    "custom.css",
 ]
 
 # Theme options
 html_theme_options = {
-    'logo_only': False,
-    'display_version': True,
-    'prev_next_buttons_location': 'bottom',
-    'style_external_links': False,
-    'vcs_pageview_mode': '',
-    'style_nav_header_background': '#2980B9',
+    "logo_only": False,
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": False,
+    "vcs_pageview_mode": "",
+    "style_nav_header_background": "#2980B9",
     # Toc options
-    'collapse_navigation': False,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "navigation_depth": 4,
+    "includehidden": True,
+    "titles_only": False,
 }
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # Autodoc settings
 autodoc_default_options = {
-    'members': True,
-    'member-order': 'bysource',
-    'special-members': '__init__',
-    'undoc-members': True,
-    'exclude-members': '__weakref__'
+    "members": True,
+    "member-order": "bysource",
+    "special-members": "__init__",
+    "undoc-members": True,
+    "exclude-members": "__weakref__",
 }
 
 autodoc_mock_imports = []
 
 # Intersphinx mapping
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', None),
-    'pandas': ('https://pandas.pydata.org/docs/', None),
-    'numpy': ('https://numpy.org/doc/stable/', None),
+    "python": ("https://docs.python.org/3", None),
+    "pandas": ("https://pandas.pydata.org/docs/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
 }
 
 # Todo extension
@@ -123,32 +124,40 @@ html_context = {
 }
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'DataTidydoc'
+htmlhelp_basename = "DataTidydoc"
 
 # LaTeX output settings
 latex_elements = {
-    'papersize': 'letterpaper',
-    'pointsize': '10pt',
-    'preamble': '',
-    'fncychap': '',
-    'maketitle': '\\maketitle',
-    'printindex': '\\printindex',
+    "papersize": "letterpaper",
+    "pointsize": "10pt",
+    "preamble": "",
+    "fncychap": "",
+    "maketitle": "\\maketitle",
+    "printindex": "\\printindex",
 }
 
 latex_documents = [
-    ('index', 'DataTidy.tex', 'DataTidy Documentation',
-     'DataTidy Development Team', 'manual'),
+    (
+        "index",
+        "DataTidy.tex",
+        "DataTidy Documentation",
+        "DataTidy Development Team",
+        "manual",
+    ),
 ]
 
 # Manual page output
-man_pages = [
-    ('index', 'datatidy', 'DataTidy Documentation',
-     [author], 1)
-]
+man_pages = [("index", "datatidy", "DataTidy Documentation", [author], 1)]
 
 # Texinfo output
 texinfo_documents = [
-    ('index', 'DataTidy', 'DataTidy Documentation',
-     author, 'DataTidy', 'Configuration-driven data processing package.',
-     'Miscellaneous'),
+    (
+        "index",
+        "DataTidy",
+        "DataTidy Documentation",
+        author,
+        "DataTidy",
+        "Configuration-driven data processing package.",
+        "Miscellaneous",
+    ),
 ]

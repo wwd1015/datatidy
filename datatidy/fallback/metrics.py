@@ -182,7 +182,9 @@ class DataQualityMetrics:
         score = 0.0
 
         # Completeness component (40% weight)
-        if completeness_diff >= 0:
+        if abs(completeness_diff) <= 0.01:  # Perfect or near-perfect completeness
+            score += 0.4
+        elif completeness_diff >= 0:
             score += 0.4 * min(1.0, completeness_diff * 2 + 0.5)
         else:
             score += 0.4 * max(0.0, 0.5 + completeness_diff * 2)

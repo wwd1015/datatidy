@@ -1,5 +1,6 @@
 """
-DataTidy: A configuration-driven data processing and cleaning package with robust fallback capabilities.
+DataTidy: A configuration-driven data processing and cleaning package with
+robust fallback capabilities.
 
 This package provides a unified interface for data processing tasks through
 YAML configuration files. It supports multiple input sources including
@@ -33,7 +34,7 @@ from .fallback.processor import FallbackProcessor, ProcessingResult
 from .fallback.logger import EnhancedLogger, ProcessingMode, ErrorCategory
 from .fallback.metrics import DataQualityMetrics, DataQualityComparison
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = [
     "DataTidy",
     "ConfigParser",

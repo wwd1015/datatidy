@@ -1,8 +1,7 @@
 """Main transformation engine for data processing."""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 import pandas as pd
-import numpy as np
 import re
 from .expressions import ExpressionParser
 from .column_operations import AdvancedColumnTransformer
@@ -225,7 +224,8 @@ class TransformationEngine:
             if null_mask.any():
                 null_indices = series[null_mask].index.tolist()
                 errors.append(
-                    f"Required field '{column_name}' has null values at indices: {null_indices}"
+                    f"Required field '{column_name}' has null values at "
+                    f"indices: {null_indices}"
                 )
 
         # Nullable validation
@@ -234,7 +234,8 @@ class TransformationEngine:
             if null_mask.any():
                 null_indices = series[null_mask].index.tolist()
                 errors.append(
-                    f"Non-nullable field '{column_name}' has null values at indices: {null_indices}"
+                    f"Non-nullable field '{column_name}' has null values at "
+                    f"indices: {null_indices}"
                 )
 
         # Numeric validations
@@ -244,7 +245,8 @@ class TransformationEngine:
             if invalid_mask.any():
                 invalid_indices = series[invalid_mask].index.tolist()
                 errors.append(
-                    f"Field '{column_name}' has values below minimum ({min_val}) at indices: {invalid_indices}"
+                    f"Field '{column_name}' has values below minimum "
+                    f"({min_val}) at indices: {invalid_indices}"
                 )
 
         if "max_value" in validation_rules:
@@ -253,7 +255,8 @@ class TransformationEngine:
             if invalid_mask.any():
                 invalid_indices = series[invalid_mask].index.tolist()
                 errors.append(
-                    f"Field '{column_name}' has values above maximum ({max_val}) at indices: {invalid_indices}"
+                    f"Field '{column_name}' has values above maximum "
+                    f"({max_val}) at indices: {invalid_indices}"
                 )
 
         # String length validations
@@ -264,7 +267,8 @@ class TransformationEngine:
             if invalid_mask.any():
                 invalid_indices = series[invalid_mask].index.tolist()
                 errors.append(
-                    f"Field '{column_name}' has values shorter than minimum length ({min_len}) at indices: {invalid_indices}"
+                    f"Field '{column_name}' has values shorter than minimum "
+                    f"length ({min_len}) at indices: {invalid_indices}"
                 )
 
         if "max_length" in validation_rules:
@@ -274,7 +278,8 @@ class TransformationEngine:
             if invalid_mask.any():
                 invalid_indices = series[invalid_mask].index.tolist()
                 errors.append(
-                    f"Field '{column_name}' has values longer than maximum length ({max_len}) at indices: {invalid_indices}"
+                    f"Field '{column_name}' has values longer than maximum "
+                    f"length ({max_len}) at indices: {invalid_indices}"
                 )
 
         # Pattern validation
@@ -286,7 +291,8 @@ class TransformationEngine:
                 if invalid_mask.any():
                     invalid_indices = series[invalid_mask].index.tolist()
                     errors.append(
-                        f"Field '{column_name}' has values not matching pattern '{pattern}' at indices: {invalid_indices}"
+                        f"Field '{column_name}' has values not matching "
+                        f"pattern '{pattern}' at indices: {invalid_indices}"
                     )
             except re.error as e:
                 errors.append(
@@ -300,7 +306,8 @@ class TransformationEngine:
             if invalid_mask.any():
                 invalid_indices = series[invalid_mask].index.tolist()
                 errors.append(
-                    f"Field '{column_name}' has values not in allowed list {allowed_values} at indices: {invalid_indices}"
+                    f"Field '{column_name}' has values not in allowed list "
+                    f"{allowed_values} at indices: {invalid_indices}"
                 )
 
         # Handle validation errors

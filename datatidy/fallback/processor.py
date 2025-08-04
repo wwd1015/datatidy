@@ -1,4 +1,6 @@
-"""Fallback processor for robust data processing with partial processing capabilities."""
+"""
+Fallback processor for robust data processing with partial processing capabilities.
+"""
 
 from typing import Any, Dict, List, Optional, Callable
 import pandas as pd
@@ -290,7 +292,12 @@ class FallbackProcessor:
             return ErrorCategory.VALIDATION_ERROR
         elif "transformation" in error_message or "expression" in error_message:
             return ErrorCategory.TRANSFORMATION_ERROR
-        elif "type" in error_message or "conversion" in error_message:
+        elif (
+            "type" in error_message
+            or "conversion" in error_message
+            or "convert" in error_message
+            or error_type == "TypeError"
+        ):
             return ErrorCategory.DATA_TYPE_ERROR
         elif "dependency" in error_message or "not found" in error_message:
             return ErrorCategory.DEPENDENCY_ERROR
