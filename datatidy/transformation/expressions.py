@@ -162,6 +162,8 @@ class SafeExpressionParser:
                     ast.Del,
                     ast.And,
                     ast.Or,
+                    ast.Index,
+                    ast.Slice,
                 ),
             ):  # Add context types
                 continue
